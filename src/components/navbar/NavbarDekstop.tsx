@@ -19,7 +19,7 @@ const WrapperIcon = styled.div`
 	align-items: center;
 	border-radius: 99px;
 	height: 50px;
-	width: 75px;
+	width: 50px;
 	transition: 0.3s ease-in-out;
 	font-size: 1.2rem;
 
@@ -56,7 +56,7 @@ const WrapperInput = styled.div`
 	justify-content: center;
 	align-items: center;
 	background-color: #ececec;
-	width: 100%;
+	width: 900px;
 	border-radius: 20px;
 `;
 
