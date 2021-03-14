@@ -1,16 +1,16 @@
-// import "./App.scss";
-// import PrimaryButton from "./components/atoms/button/Button";
-// import { ThemeProvider } from "styled-components";
 import { BrowserRouter as Router } from "react-router-dom";
 import NavbarDekstop from "./components/navbar/NavbarDekstop";
 import AppRoutes from "./routers/Routers";
+import ImageProvider from "./utils/contexts/ProviderImageContext";
 
 function App() {
 	return (
+		<ImageProvider>
 		<Router>
 			<NavbarDekstop />
 			<AppRoutes />
 		</Router>
+		</ImageProvider>
 	);
 }
 

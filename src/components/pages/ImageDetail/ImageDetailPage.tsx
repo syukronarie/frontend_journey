@@ -1,7 +1,11 @@
-import { useHistory } from "react-router";
+import { useEffect } from "react";
+import { useHistory, useLocation } from "react-router";
 import LeftArrowIcon from "src/assets/icons/LeftArrowIcon";
 import ShareIcon from "src/assets/icons/ShareIcon";
+import GlobalColors from "src/styles/color/colors";
+import { FlickrResponseType } from "src/utils/types/flickr";
 import styled from "styled-components";
+import ImageHomePage from "../ImageHome/ImageHomePage";
 
 const ImageDetailWrapper = styled.div`
 	display: flex;
@@ -71,7 +75,7 @@ const DownloadButton = styled.span`
 	z-index: 1;
 
 	&:hover {
-		background-color: #a80000;
+		background-color: ${GlobalColors.RED};
 	}
 `;
 
@@ -108,40 +112,60 @@ const LinkButtonLeftSide = styled.a`
 	}
 `;
 
-const LinkSpan = styled.span`
-	opacity: 0;
-	position: absolute;
-	color: white;
-	top: 50%;
-	left: 20%;
-	font-size: 16px;
-	font-weight: 700;
-	z-index: 1;
-	transition: filter 0.25s ease-in-out;
-`;
+// const LinkSpan = styled.span`
+// 	opacity: 0;
+// 	position: absolute;
+// 	color: white;
+// 	top: 50%;
+// 	left: 20%;
+// 	font-size: 16px;
+// 	font-weight: 700;
+// 	z-index: 1;
+// 	transition: filter 0.25s ease-in-out;
+// `;
 
 const ImageDetailPage: React.FC = () => {
 	const history = useHistory();
-
+	const location = useLocation<FlickrResponseType>();
 	const handleGoBack = () => {
 		history.goBack();
 	};
 
+	useEffect(() => {
+		if (!location.state) {
+			window.location.replace("/");
+		}
+		window.scrollTo(0, 0);
+	}, [location.state]);
+
 	return (
-		<ImageDetailWrapper>
-			<BackButton onClick={handleGoBack} />
-			<ImageWrapper>
-				<LinkButtonLeftSide>
-					<LinkSpan>jlhadsfhkjdhsafkj</LinkSpan>
-					<Image src="https://source.unsplash.com/random/243" />
-				</LinkButtonLeftSide>
-				<InfoImage>
-					<LinkButton>Blhhjdfk</LinkButton>
-					<ShareButton />
-					<DownloadButton>Download</DownloadButton>
-				</InfoImage>
-			</ImageWrapper>
-		</ImageDetailWrapper>
+		<>
+			{!!location.state && (
+				<>
+					<ImageDetailWrapper>
+						<BackButton onClick={handleGoBack} />
+						<ImageWrapper>
+							<a href={location.state.link} target="_blank" rel="noreferrer">
+								<LinkButtonLeftSide>
+									<Image src={location.state.media.large} />
+								</LinkButtonLeftSide>
+							</a>
+							<InfoImage>
+								<LinkButton>{location.state.link}</LinkButton>
+								<ShareButton />
+								<a
+									href={location.state.media.large}
+									download={location.state.media.large}
+									title="ImageName">
+									<DownloadButton>Download</DownloadButton>
+								</a>
+							</InfoImage>
+						</ImageWrapper>
+					</ImageDetailWrapper>
+					<ImageHomePage />
+				</>
+			)}
+		</>
 	);
 };
 

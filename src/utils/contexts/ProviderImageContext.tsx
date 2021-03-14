@@ -1,37 +1,52 @@
 import React, { createContext, useReducer, FC } from "react";
-const initState = {};
+import IMAGE_CONSTANT from "../constants/imageConstant";
+import { DispatchType, ReducerActionType } from "../types/globals";
+
+const initState = {
+  data: [
+    {
+      link: "",
+      media: {
+        small: "",
+        medium: "",
+        large: "",
+      },
+      title: "",
+      author: "",
+      published: "",
+      description: "",
+      tags: "",
+    },
+  ],
+  isLoading: true,
+};
 
 type StateType = typeof initState;
 
-export type ReducerActionType = {
-	type?: string;
-	payload?: any;
-};
-
 const reducer = (state: StateType, action: ReducerActionType) => {
-	switch (action.type) {
-		default:
-			return state;
-	}
+  switch (action.type) {
+    case IMAGE_CONSTANT.SET_DATA_IMAGE:
+      return { ...state, data: action.payload };
+    case IMAGE_CONSTANT.SET_IS_LOADING:
+      return { ...state, isLoading: action.payload };
+    default:
+      return state;
+  }
 };
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-type Dispacth<A, D> = ({ type: A, payload: D }) => void;
 
 interface ValueContext {
-	state?: StateType;
-	dispatch?: Dispacth<string, any>;
+  state?: StateType;
 }
 
-export const ImageContext = createContext<ValueContext>(null);
+export const ImageContext = createContext<ValueContext & DispatchType>(null);
 
 const ProviderImage: FC = ({ children }) => {
-	const [state, dispatch] = useReducer(reducer, initState);
-	return (
-		<ImageContext.Provider value={{ state, dispatch }}>
-			{children}
-		</ImageContext.Provider>
-	);
+  const [state, dispatch] = useReducer(reducer, initState);
+  return (
+    <ImageContext.Provider value={{ state, dispatch }}>
+      {children}
+    </ImageContext.Provider>
+  );
 };
 
 export default ProviderImage;
