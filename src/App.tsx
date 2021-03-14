@@ -1,18 +1,16 @@
-import "./App.scss";
+// import "./App.scss";
 // import PrimaryButton from "./components/atoms/button/Button";
 // import { ThemeProvider } from "styled-components";
-// import { darkTheme } from "./styles/theme";
+import { BrowserRouter as Router } from "react-router-dom";
 import NavbarDekstop from "./components/navbar/NavbarDekstop";
-import ImageContentPage from "./components/pages/ImageContent/ImageContentPage";
+import AppRoutes from "./routers/Routers";
 
 function App() {
 	return (
-		<>
+		<Router>
 			<NavbarDekstop />
-			{/* <ThemeProvider theme={darkTheme}> */}
-			<ImageContentPage />
-			{/* </ThemeProvider> */}
-		</>
+			<AppRoutes />
+		</Router>
 	);
 }
 

@@ -67,6 +67,7 @@ const MasonryImage = styled.img`
 	overflow: hidden;
 	width: 100%;
 	transition: 0.3s ease-in-out;
+	cursor: zoom-in;
 `;
 
 const LinkButton = styled.a`
@@ -89,9 +90,10 @@ const ShareButton = styled(ShareIcon)`
 	font-size: 1.5rem;
 	background-color: grey;
 	padding: 10px;
+	cursor: pointer;
 `;
 
-const ImageContentPage: React.FC = () => {
+const ImageHomePage: React.FC = () => {
 	return (
 		<MasonryWrapper>
 			<Masonry>
@@ -111,4 +113,4 @@ const ImageContentPage: React.FC = () => {
 	);
 };
 
-export default ImageContentPage;
+export default ImageHomePage;

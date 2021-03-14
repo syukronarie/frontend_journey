@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import BellIcon from "../../assets/icons/BellIcon";
 import DownArrowIcon from "../../assets/icons/DownArrowIcon";
 import LogoIcon from "../../assets/logo/LogoIcon";
@@ -97,8 +98,12 @@ const NavbarDekstop: React.FC = () => {
 				<Logo />
 			</WrapperIcon>
 			<Menus>
-				<MenuItem>Home</MenuItem>
-				<MenuItem>Today</MenuItem>
+				<Link to="/">
+					<MenuItem>Home</MenuItem>
+				</Link>
+				<Link to="/today">
+					<MenuItem>Today</MenuItem>
+				</Link>
 			</Menus>
 			<WrapperInput>
 				<label htmlFor="search">
