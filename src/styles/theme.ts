@@ -1,4 +1,4 @@
-import { DefaultTheme } from "styled-components";
+// import { DefaultTheme } from "styled-components";
 
 declare module "styled-components" {
 	export interface DefaultTheme {
@@ -7,12 +7,12 @@ declare module "styled-components" {
 	}
 }
 
-export const lightTheme: DefaultTheme = {
+export const lightTheme = {
 	primaryColor: "#333",
 	secondaryColor: "#666",
 };
 
-export const darkTheme: DefaultTheme = {
+export const darkTheme = {
 	primaryColor: "#fff",
 	secondaryColor: "#cacaca",
 };

@@ -8,6 +8,15 @@ function App() {
 	return (
 		<>
 			<NavbarDekstop />
+			{/* <ThemeProvider theme={darkTheme}> */}
+			<div className="row">
+				{Array.from({ length: 2 }).map((e, i) => (
+					<div className="image">
+						<img src={`https://source.unsplash.com/random/${i}`} alt="" />
+					</div>
+				))}
+			</div>
+			{/* </ThemeProvider> */}
 		</>
 	);
 }
