@@ -1,0 +1,18 @@
+.container {
+	margin: auto;
+	max-width: 720px;
+	height: 1500px;
+}
+
+.row {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	grid-template-rows: masonary;
+	align-content: start;
+}
+.image {
+	height: auto;
+	img {
+		width: 200px;
+	}
+}
