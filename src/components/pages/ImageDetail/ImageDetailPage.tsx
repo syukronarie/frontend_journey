@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useHistory, useLocation } from "react-router";
 import { FlickrResponseType } from "src/utils/types/flickr";
+import { Helmet } from "react-helmet";
 import styled from "styled-components";
 import Sizing from "src/styles/Sizing";
 import GlobalColors from "src/styles/color/colors";
@@ -138,6 +139,10 @@ const ImageDetailPage: React.FC = () => {
 		<>
 			{!!location.state && (
 				<ImageDetailStyled>
+					<Helmet>
+						<title>Details | Journey App</title>
+						<meta name="description" content="Helmet application" />
+					</Helmet>
 					<div className="imageDetailWrapper">
 						<div className="backButton" onClick={handleGoBack}>
 							<label htmlFor="back" aria-label="Back">
