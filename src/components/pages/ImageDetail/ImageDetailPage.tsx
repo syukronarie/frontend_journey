@@ -27,6 +27,11 @@ const ImageDetailStyled = styled.div`
 		align-items: center;
 		object-fit: cover;
 		filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.1));
+		z-index: -1;
+
+		@media screen and (max-width: 768px) {
+			flex-direction: column;
+		}
 	}
 
 	.linkButtonLeftSide {
@@ -65,6 +70,13 @@ const ImageDetailStyled = styled.div`
 		&:hover {
 			filter: brightness(60%);
 		}
+
+		@media screen and (max-width: 768px) {
+			max-width: 295px;
+			margin-top: 20px;
+			margin: auto;
+			border-radius: 10px;
+		}
 	}
 
 	.infoImage {
@@ -77,6 +89,18 @@ const ImageDetailStyled = styled.div`
 		width: 500px;
 		height: 99%;
 		border-radius: 0 30px 30px 0;
+
+		@media screen and (max-width: 768px) {
+			width: 295px;
+			border-radius: 10px;
+			margin-top: 15px;
+			padding: 5rem 0 2rem 0;
+
+			svg {
+				top: 18px;
+				left: 22px;
+			}
+		}
 	}
 
 	.infoAuthor {
@@ -129,6 +153,11 @@ const BackButton = styled(LeftArrowIcon)`
 	position: fixed;
 	left: 40px;
 	cursor: pointer;
+
+	@media screen and (max-width: 768px) {
+		left: 5px;
+		top: 28px;
+	}
 `;
 
 const DownloadButton = styled.a`
