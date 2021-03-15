@@ -18,7 +18,7 @@ const MasonryWrapper = styled.div`
 `;
 
 const Masonry = styled.div`
-	columns: 1;
+	columns: 2;
 	column-gap: 10px;
 	@media screen and (max-width: 1023px) and (min-width: 768px) {
 		columns: 3;

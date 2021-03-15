@@ -5,16 +5,56 @@ import LogoIcon from "../../assets/logo/LogoIcon";
 import SearchIcon from "../../assets/icons/SearchIcon";
 import styled from "styled-components";
 import GlobalColors from "src/styles/color/colors";
-import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 const StyledNavbar = styled.div`
-	display: flex;
-	justify-content: row;
-	align-items: center;
-	max-width: 1200px;
-	margin: auto;
-	padding: 20px 0;
+	.mainNavbar {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		margin: auto;
+		padding: 20px 0;
+	}
+
+	.secondNavbar {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		position: fixed;
+		opacity: 0;
+		top: -50px;
+		overflow: hidden;
+		transition: 0.5s ease-out;
+		transform: translateY(-20%);
+	}
+
+	.navbarActive {
+		z-index: 1;
+		opacity: 1;
+		transition: 0.5s ease-in-out;
+		transform: translateY(60%);
+		background-color: #fff;
+		height: 5rem;
+		box-shadow: #0000001a 1px 3px 10px 0px;
+	}
+
+	.appsName {
+		font-size: 1.5rem;
+		font-weight: 700;
+		margin-right: 14px;
+	}
+
+	.searchWrapper {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: ${GlobalColors.WHITE_TRANSPARENT};
+		width: 700px;
+		border-radius: 45px;
+		margin: 0 10px;
+	}
 `;
 
 const WrapperIcon = styled.div`
@@ -77,7 +117,7 @@ const WrapperInput = styled.div`
 	justify-content: center;
 	align-items: center;
 	background-color: ${GlobalColors.WHITE_TRANSPARENT};
-	width: 900px;
+	width: 800px;
 	border-radius: 45px;
 	margin: 0 10px;
 `;
@@ -116,7 +156,9 @@ const NavbarDekstop: React.FC = () => {
 	const [showNavbar, setShowNavbar] = useState(false);
 
 	const handleScroll = () => {
-		window.pageYOffset > 40 ? setShowNavbar(true) : setShowNavbar(false);
+		window.pageYOffset > 60 ? setShowNavbar(true) : setShowNavbar(false);
+
+		console.log(window.pageYOffset);
 	};
 
 	useEffect(() => {
@@ -128,35 +170,70 @@ const NavbarDekstop: React.FC = () => {
 
 	return (
 		<StyledNavbar>
-			<WrapperIcon>
-				<Logo />
-			</WrapperIcon>
-			<Menus>
-				<NavLink to="/" exact onClick={() => window.location.replace("/")}>
-					<MenuItem>Home</MenuItem>
-				</NavLink>
-				<NavLink
-					to="/today"
-					exact
-					onClick={() => window.location.replace("/today")}>
-					<MenuItem>Today</MenuItem>
-				</NavLink>
-			</Menus>
-			<WrapperInput>
-				<label htmlFor="search">
-					<Search />
-				</label>
-				<SearchInput id="search" placeholder="search" />
-			</WrapperInput>
-			<WrapperIcon>
-				<BellIcon />
-			</WrapperIcon>
-			<WrapperIcon>
-				<UserIcon>A</UserIcon>
-			</WrapperIcon>
-			<WrapperIcon>
-				<DownArrowIcon />
-			</WrapperIcon>
+			<nav className="mainNavbar">
+				<WrapperIcon>
+					<Logo />
+				</WrapperIcon>
+				<Menus>
+					<NavLink to="/" exact onClick={() => window.location.replace("/")}>
+						<MenuItem>Home</MenuItem>
+					</NavLink>
+					<NavLink
+						to="/today"
+						exact
+						onClick={() => window.location.replace("/today")}>
+						<MenuItem>Today</MenuItem>
+					</NavLink>
+				</Menus>
+				<WrapperInput>
+					<label htmlFor="search">
+						<Search />
+					</label>
+					<SearchInput id="search" placeholder="search" />
+				</WrapperInput>
+				<WrapperIcon>
+					<BellIcon />
+				</WrapperIcon>
+				<WrapperIcon>
+					<UserIcon>A</UserIcon>
+				</WrapperIcon>
+				<WrapperIcon>
+					<DownArrowIcon />
+				</WrapperIcon>
+			</nav>
+
+			<nav className={`secondNavbar ${showNavbar ? "navbarActive" : ""}`}>
+				<WrapperIcon>
+					<Logo />
+				</WrapperIcon>
+				<h1 className="appsName">Journey</h1>
+				<Menus>
+					<NavLink to="/" exact onClick={() => window.location.replace("/")}>
+						<MenuItem>Home</MenuItem>
+					</NavLink>
+					<NavLink
+						to="/today"
+						exact
+						onClick={() => window.location.replace("/today")}>
+						<MenuItem>Today</MenuItem>
+					</NavLink>
+				</Menus>
+				<div className="searchWrapper">
+					<label htmlFor="search">
+						<Search />
+					</label>
+					<SearchInput id="search" placeholder="search" />
+				</div>
+				<WrapperIcon>
+					<BellIcon />
+				</WrapperIcon>
+				<WrapperIcon>
+					<UserIcon>A</UserIcon>
+				</WrapperIcon>
+				<WrapperIcon>
+					<DownArrowIcon />
+				</WrapperIcon>
+			</nav>
 		</StyledNavbar>
 	);
 };
