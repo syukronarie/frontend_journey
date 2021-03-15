@@ -12,14 +12,19 @@ import GlobalColors from "src/styles/color/colors";
 import ShareIcon from "src/assets/icons/ShareIcon";
 
 const ImageHomeStyled = styled.div`
-	padding-top: ${Sizing.NAVBAR_HIGHT};
 	max-width: 1200px;
 	margin-right: auto;
 	margin-left: auto;
 
+	@media screen and (min-width: 768px) {
+		padding-top: ${Sizing.NAVBAR_HIGHT};
+	}
+
 	.masonry {
 		columns: 2;
 		column-gap: 10px;
+		padding: 15px;
+
 		@media screen and (max-width: 1023px) and (min-width: 768px) {
 			columns: 3;
 		}
@@ -75,6 +80,21 @@ const ImageHomeStyled = styled.div`
 			opacity: 0.9;
 		}
 	}
+
+	.loadingPercentage {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		position: fixed;
+		height: 100vh;
+		width: 100%;
+		top: 0;
+		left: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
 `;
 
 const DownloadButton = styled.a`
@@ -111,6 +131,21 @@ const ShareButton = styled(ShareIcon)`
 	&:hover {
 		opacity: 0.9;
 	}
+`;
+
+type DotType = {
+	percentage?: number;
+};
+
+const Dot = styled.div<DotType>`
+	height: 1rem;
+	width: ${(props) => props.percentage + "px"};
+	text-align: center;
+	background-color: ${GlobalColors.RED};
+	color: #fff;
+	border-radius: 30px;
+	display: inline-block;
+	transition: 0.5s ease-in-out;
 `;
 
 const ImageHomePage: React.FC = () => {
@@ -168,7 +203,15 @@ const ImageHomePage: React.FC = () => {
 	return (
 		<ImageHomeStyled>
 			<div className="masonry">
-				{isLoading || (!!ItemLoading && `${percentage}%`)}
+				{isLoading ||
+					(!!ItemLoading && (
+						<div className="loadingPercentage">
+							Loading
+							<Dot percentage={percentage}>
+								<p>{percentage}%</p>
+							</Dot>
+						</div>
+					))}
 				<div style={{ display: !ItemLoading && !isLoading ? "" : "none" }}>
 					{data?.map((item, i) => (
 						<div

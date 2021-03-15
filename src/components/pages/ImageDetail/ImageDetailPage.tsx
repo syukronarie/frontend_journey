@@ -13,9 +13,11 @@ const ImageDetailStyled = styled.div`
 		display: flex;
 		justify-content: center;
 		max-width: 1200px;
-		padding-top: ${Sizing.NAVBAR_HIGHT};
 		height: auto;
 		margin: auto;
+		@media screen and (min-width: 768px) {
+			padding-top: ${Sizing.NAVBAR_HIGHT};
+		}
 	}
 
 	.imageWrapper {

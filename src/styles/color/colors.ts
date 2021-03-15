@@ -1,6 +1,6 @@
 const GlobalColors = {
 	BLACK: "#111111",
-	FONT_GREY: "#757575",
+	FONT_GREY: "#656565",
 	WHITE: "#eee",
 	WHITE_TRANSPARENT: "#eee",
 	RED: "#F14668",
