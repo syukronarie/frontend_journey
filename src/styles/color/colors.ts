@@ -3,7 +3,8 @@ const GlobalColors = {
 	FONT_GREY: "#757575",
 	WHITE: "#eee",
 	WHITE_TRANSPARENT: "#eee",
-	RED: "#E60023",
+	RED: "#F14668",
+	RED_HOVER: "#CE1D4D",
 	GREY: "#767676",
 	BLUE: "#0074E8",
 };

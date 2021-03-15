@@ -61,13 +61,13 @@ const BackButton = styled(LeftArrowIcon)`
 	cursor: pointer;
 `;
 
-const DownloadButton = styled.span`
+const DownloadButton = styled.a`
 	position: absolute;
 	right: 20px;
 	top: 20px;
 	padding: 10px 10px;
 	border-radius: 40px;
-	background-color: red;
+	background-color: ${GlobalColors.RED};
 	color: #fff;
 	font-size: 16px;
 	font-weight: 700;
@@ -75,26 +75,26 @@ const DownloadButton = styled.span`
 	z-index: 1;
 
 	&:hover {
-		background-color: ${GlobalColors.RED};
+		background-color: ${GlobalColors.RED_HOVER};
 	}
 `;
 
-const LinkButton = styled.a`
-	position: absolute;
-	top: 90px;
-	left: 20px;
-	color: black;
-	border-radius: 30px;
-	padding: 10px;
-	cursor: pointer;
-	transition: filter 0.25s ease-in-out;
+// const LinkButton = styled.a`
+// 	position: absolute;
+// 	top: 90px;
+// 	left: 20px;
+// 	color: black;
+// 	border-radius: 30px;
+// 	padding: 10px;
+// 	cursor: pointer;
+// 	transition: filter 0.25s ease-in-out;
 
-	&:hover {
-		> img {
-			filter: brightness(60%);
-		}
-	}
-`;
+// 	&:hover {
+// 		> img {
+// 			filter: brightness(60%);
+// 		}
+// 	}
+// `;
 
 const LinkButtonLeftSide = styled.a`
 	color: white;
@@ -112,17 +112,20 @@ const LinkButtonLeftSide = styled.a`
 	}
 `;
 
-// const LinkSpan = styled.span`
-// 	opacity: 0;
-// 	position: absolute;
-// 	color: white;
-// 	top: 50%;
-// 	left: 20%;
-// 	font-size: 16px;
-// 	font-weight: 700;
-// 	z-index: 1;
-// 	transition: filter 0.25s ease-in-out;
-// `;
+const ImageDetailStyled = styled.div`
+	.backButton {
+		font-size: 2rem;
+		position: fixed;
+		left: 40px;
+		top: 100px;
+		cursor: pointer;
+
+		label {
+			font-size: 16px;
+			margin-left: 40px;
+		}
+	}
+`;
 
 const ImageDetailPage: React.FC = () => {
 	const history = useHistory();
@@ -131,6 +134,12 @@ const ImageDetailPage: React.FC = () => {
 		history.goBack();
 	};
 
+	const formmatedPublishDate = `${
+		location.state.published.split("T")[0]
+	} at  ${location.state.published.split("T")[1].slice(0, -1)}`;
+	const formmatedAuthor = `${location.state.author.replace(/[{("")}]/g, "")}`;
+
+	// handle scroll top when user click new image
 	useEffect(() => {
 		if (!location.state) {
 			window.location.replace("/");
@@ -141,29 +150,43 @@ const ImageDetailPage: React.FC = () => {
 	return (
 		<>
 			{!!location.state && (
-				<>
+				<ImageDetailStyled>
 					<ImageDetailWrapper>
-						<BackButton onClick={handleGoBack} />
+						<div className="backButton" onClick={handleGoBack}>
+							<label htmlFor="back" aria-label="Back">
+								Back
+							</label>
+							<BackButton id="back" />
+						</div>
 						<ImageWrapper>
-							<a href={location.state.link} target="_blank" rel="noreferrer">
-								<LinkButtonLeftSide>
-									<Image src={location.state.media.large} />
-								</LinkButtonLeftSide>
-							</a>
+							<LinkButtonLeftSide
+								href={location.state.link}
+								target="_blank"
+								rel="noreferrer"
+								title="View on image Flikr"
+								download>
+								<Image src={location.state.media.large} />
+							</LinkButtonLeftSide>
 							<InfoImage>
-								<LinkButton>{location.state.link}</LinkButton>
+								<p>Author: {formmatedAuthor}</p>
+								<p>Tags: {location.state.tags}</p>
+								<p>Published: {formmatedPublishDate}</p>
+								<a href={location.state.link} target="_blank" rel="noreferrer">
+									View On Flickr
+								</a>
 								<ShareButton />
-								<a
+								<DownloadButton
 									href={location.state.media.large}
 									download={location.state.media.large}
-									title="ImageName">
-									<DownloadButton>Download</DownloadButton>
-								</a>
+									title="Download This Image"
+									target="_blank">
+									Download
+								</DownloadButton>
 							</InfoImage>
 						</ImageWrapper>
 					</ImageDetailWrapper>
 					<ImageHomePage />
-				</>
+				</ImageDetailStyled>
 			)}
 		</>
 	);
