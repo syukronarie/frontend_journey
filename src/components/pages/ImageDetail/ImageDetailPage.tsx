@@ -3,6 +3,7 @@ import { useHistory, useLocation } from "react-router";
 import LeftArrowIcon from "src/assets/icons/LeftArrowIcon";
 import ShareIcon from "src/assets/icons/ShareIcon";
 import GlobalColors from "src/styles/color/colors";
+import Sizing from "src/styles/Sizing";
 import { FlickrResponseType } from "src/utils/types/flickr";
 import styled from "styled-components";
 import ImageHomePage from "../ImageHome/ImageHomePage";
@@ -11,6 +12,7 @@ const ImageDetailWrapper = styled.div`
 	display: flex;
 	justify-content: center;
 	max-width: 1200px;
+	padding-top: ${Sizing.NAVBAR_HIGHT};
 	height: auto;
 	margin: auto;
 `;
@@ -78,23 +80,6 @@ const DownloadButton = styled.a`
 		background-color: ${GlobalColors.RED_HOVER};
 	}
 `;
-
-// const LinkButton = styled.a`
-// 	position: absolute;
-// 	top: 90px;
-// 	left: 20px;
-// 	color: black;
-// 	border-radius: 30px;
-// 	padding: 10px;
-// 	cursor: pointer;
-// 	transition: filter 0.25s ease-in-out;
-
-// 	&:hover {
-// 		> img {
-// 			filter: brightness(60%);
-// 		}
-// 	}
-// `;
 
 const LinkButtonLeftSide = styled.a`
 	color: white;

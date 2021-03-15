@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { GetAllDataImage } from "src/api/imageApi";
+import { GetAllDataImage, GetAllDataImageByTags } from "src/api/imageApi";
 import ShareIcon from "src/assets/icons/ShareIcon";
 import IMAGE_CONSTANT from "src/utils/constants/imageConstant";
 import { ImageContext } from "src/utils/contexts/ProviderImageContext";
@@ -9,9 +9,11 @@ import useLoadHandler from "src/utils/hooks/useLoad";
 import { useHistory } from "react-router";
 import slugGenerator from "src/utils/helpers/slugGenerator";
 import GlobalColors from "src/styles/color/colors";
+import Sizing from "src/styles/Sizing";
+import { useLocation } from "react-router-dom";
 
 const MasonryWrapper = styled.div`
-	padding: 1.5em;
+	padding-top: ${Sizing.NAVBAR_HIGHT};
 	max-width: 1200px;
 	margin-right: auto;
 	margin-left: auto;
@@ -125,20 +127,38 @@ const ImageHomePage: React.FC = () => {
 		percentage,
 	} = useLoadHandler();
 
+	const location = useLocation();
+	const param = new URLSearchParams(location.search);
+	const search = param.get("search");
+
 	// Handle First Paint
 	useEffect(() => {
-		(async () => {
-			const dataImage = await GetAllDataImage();
-			dispatch({
-				type: IMAGE_CONSTANT.SET_DATA_IMAGE,
-				payload: dataImage.data.data,
-			});
-			dispatch({
-				type: IMAGE_CONSTANT.SET_IS_LOADING,
-				payload: false,
-			});
-		})();
-	}, [dispatch]);
+		if (!!search) {
+			(async () => {
+				const dataImage = await GetAllDataImageByTags(search);
+				dispatch({
+					type: IMAGE_CONSTANT.SET_DATA_IMAGE,
+					payload: dataImage.data.data,
+				});
+				dispatch({
+					type: IMAGE_CONSTANT.SET_IS_LOADING,
+					payload: false,
+				});
+			})();
+		} else {
+			(async () => {
+				const dataImage = await GetAllDataImage();
+				dispatch({
+					type: IMAGE_CONSTANT.SET_DATA_IMAGE,
+					payload: dataImage.data.data,
+				});
+				dispatch({
+					type: IMAGE_CONSTANT.SET_IS_LOADING,
+					payload: false,
+				});
+			})();
+		}
+	}, [dispatch, search]);
 
 	const history = useHistory();
 	const handleGoToDetail = (item) => {
@@ -149,8 +169,9 @@ const ImageHomePage: React.FC = () => {
 	return (
 		<MasonryWrapper>
 			<Masonry>
+				{isLoading && <div>Loadingggg</div>}
 				{isLoading || (!!ItemLoading && `${percentage}%`)}
-				<div style={{ display: !ItemLoading ? "" : "none" }}>
+				<div style={{ display: !ItemLoading && !isLoading ? "" : "none" }}>
 					{data?.map((item, i) => (
 						<MasonryItem onClick={() => handleGoToDetail(item)} key={i}>
 							<DownloadButton
