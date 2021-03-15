@@ -46,16 +46,14 @@ const ImageDetailStyled = styled.div`
 	}
 
 	.backButton {
+		display: flex;
+		justify-content: center;
+		align-items: center;
 		font-size: 2rem;
 		position: fixed;
 		left: 40px;
 		top: 100px;
 		cursor: pointer;
-
-		label {
-			font-size: 16px;
-			margin-left: 40px;
-		}
 	}
 
 	.image {
@@ -70,11 +68,48 @@ const ImageDetailStyled = styled.div`
 	}
 
 	.infoImage {
+		display: flex;
+		justify-content: center;
+		align-content: center;
+		flex-flow: column;
 		position: relative;
 		background-color: #fff;
 		width: 500px;
 		height: 99%;
 		border-radius: 0 30px 30px 0;
+	}
+
+	.infoAuthor {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-flow: column;
+		gap: 15px;
+	}
+
+	.moreImage {
+		text-align: center;
+
+		h3 {
+			position: relative;
+			top: 50px;
+			font-size: 20px;
+			font-weight: 700;
+		}
+	}
+
+	.button {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: ${GlobalColors.GREY};
+		color: #fff;
+		height: 2rem;
+		width: 10rem;
+
+		&:hover {
+			background-color: ${GlobalColors.FONT_GREY};
+		}
 	}
 `;
 
@@ -84,7 +119,7 @@ const ShareButton = styled(ShareIcon)`
 	top: 20px;
 	left: 28px;
 	font-size: 1.5rem;
-	background-color: grey;
+	background-color: ${GlobalColors.WHITE_TRANSPARENT};
 	padding: 10px;
 	cursor: pointer;
 `;
@@ -93,7 +128,6 @@ const BackButton = styled(LeftArrowIcon)`
 	font-size: 2rem;
 	position: fixed;
 	left: 40px;
-	top: 100px;
 	cursor: pointer;
 `;
 
@@ -145,10 +179,7 @@ const ImageDetailPage: React.FC = () => {
 					</Helmet>
 					<div className="imageDetailWrapper">
 						<div className="backButton" onClick={handleGoBack}>
-							<label htmlFor="back" aria-label="Back">
-								Back
-							</label>
-							<BackButton id="back" />
+							<BackButton />
 						</div>
 						<div className="imageWrapper">
 							<a
@@ -165,12 +196,18 @@ const ImageDetailPage: React.FC = () => {
 								/>
 							</a>
 							<div className="infoImage">
-								<p>Author: {formmatedAuthor}</p>
-								<p>Tags: {location.state.tags}</p>
-								<p>Published: {formmatedPublishDate}</p>
-								<a href={location.state.link} target="_blank" rel="noreferrer">
-									View On Flickr
-								</a>
+								<div className="infoAuthor">
+									<p>Author: {formmatedAuthor}</p>
+									{!!location.state.tags && <p>Tags: {location.state.tags}</p>}
+									<p>Published: {formmatedPublishDate}</p>
+									<a
+										href={location.state.link}
+										className="button"
+										target="_blank"
+										rel="noreferrer">
+										View On Flickr
+									</a>
+								</div>
 								<ShareButton />
 								<DownloadButton
 									href={location.state.media.large}
@@ -181,6 +218,9 @@ const ImageDetailPage: React.FC = () => {
 								</DownloadButton>
 							</div>
 						</div>
+					</div>
+					<div className="moreImage">
+						<h3>More images ...</h3>
 					</div>
 					<ImageHomePage />
 				</ImageDetailStyled>

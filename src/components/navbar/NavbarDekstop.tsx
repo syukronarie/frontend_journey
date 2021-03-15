@@ -134,17 +134,6 @@ const StyledNavbar = styled.div`
 		}
 	}
 
-	.userIcon {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		border-radius: 99px;
-		height: 25px;
-		width: 25px;
-		margin: 12px;
-		background-color: ${GlobalColors.WHITE_TRANSPARENT};
-	}
-
 	.navbarMobile {
 		display: none;
 		position: fixed;
@@ -208,6 +197,10 @@ const StyledNavbar = styled.div`
 				outline: none;
 			}
 		}
+	}
+
+	.transition {
+		transition: 0.3s ease-in-out;
 	}
 `;
 
@@ -322,13 +315,13 @@ const NavbarDekstop: React.FC = () => {
 					/>
 				</div>
 				<div className="wrapperIcon">
-					<BellIcon />
+					<BellIcon className="transition" />
 				</div>
 				<div className="wrapperIcon">
-					<p className="userIcon">A</p>
+					<UserIcon className="transition" />
 				</div>
 				<div className="wrapperIcon">
-					<DownArrowIcon />
+					<DownArrowIcon className="transition" />
 				</div>
 			</nav>
 		</StyledNavbar>

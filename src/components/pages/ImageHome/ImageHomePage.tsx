@@ -52,6 +52,10 @@ const ImageHomeStyled = styled.div`
 			a,
 			svg {
 				display: flex;
+
+				@media screen and (max-width: 768px) {
+					display: none;
+				}
 			}
 		}
 	}
@@ -63,6 +67,10 @@ const ImageHomeStyled = styled.div`
 		width: 100%;
 		transition: 0.3s ease-in-out;
 		cursor: zoom-in;
+
+		@media screen and (max-width: 768px) {
+			border-radius: 10px;
+		}
 	}
 
 	.linkButton {
@@ -94,6 +102,21 @@ const ImageHomeStyled = styled.div`
 		display: flex;
 		align-items: center;
 		justify-content: center;
+	}
+
+	.emptyResult {
+		display: flex;
+		justify-content: center;
+		align-items: flex-start;
+		flex-direction: column;
+		gap: 5px;
+		height: 30rem;
+		width: auto;
+		position: fixed;
+
+		@media screen and (max-width: 768px) {
+			font-size: 14px;
+		}
 	}
 `;
 
@@ -213,6 +236,18 @@ const ImageHomePage: React.FC = () => {
 						</div>
 					))}
 				<div style={{ display: !ItemLoading && !isLoading ? "" : "none" }}>
+					{data.length === 0 && (
+						<div className="emptyResult">
+							<h1>
+								Your search - <b style={{ fontWeight: 700 }}>{search}</b> - did
+								not match any tags.
+							</h1>
+							<p>Suggestions:</p>
+							<li>Make sure that all words are spelled correctly.</li>
+							<li>Try different keywords.</li>
+							<li>Try more general keywords.</li>
+						</div>
+					)}
 					{data?.map((item, i) => (
 						<div
 							className="masonryItem"
