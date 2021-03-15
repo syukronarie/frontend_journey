@@ -1,47 +1,78 @@
 import { useEffect } from "react";
 import { useHistory, useLocation } from "react-router";
-import LeftArrowIcon from "src/assets/icons/LeftArrowIcon";
-import ShareIcon from "src/assets/icons/ShareIcon";
-import GlobalColors from "src/styles/color/colors";
-import Sizing from "src/styles/Sizing";
 import { FlickrResponseType } from "src/utils/types/flickr";
 import styled from "styled-components";
+import Sizing from "src/styles/Sizing";
+import GlobalColors from "src/styles/color/colors";
 import ImageHomePage from "../ImageHome/ImageHomePage";
+import ShareIcon from "src/assets/icons/ShareIcon";
+import LeftArrowIcon from "src/assets/icons/LeftArrowIcon";
 
-const ImageDetailWrapper = styled.div`
-	display: flex;
-	justify-content: center;
-	max-width: 1200px;
-	padding-top: ${Sizing.NAVBAR_HIGHT};
-	height: auto;
-	margin: auto;
-`;
-
-const ImageWrapper = styled.div`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	object-fit: cover;
-	filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.1));
-`;
-
-const Image = styled.img`
-	width: 500px;
-	height: auto;
-	border-radius: 30px 0 0 30px;
-	transition: filter 0.25s ease-in-out;
-	cursor: pointer;
-	&:hover {
-		filter: brightness(60%);
+const ImageDetailStyled = styled.div`
+	.imageDetailWrapper {
+		display: flex;
+		justify-content: center;
+		max-width: 1200px;
+		padding-top: ${Sizing.NAVBAR_HIGHT};
+		height: auto;
+		margin: auto;
 	}
-`;
 
-const InfoImage = styled.div`
-	position: relative;
-	background-color: #fff;
-	width: 500px;
-	height: 99%;
-	border-radius: 0 30px 30px 0;
+	.imageWrapper {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		object-fit: cover;
+		filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.1));
+	}
+
+	.linkButtonLeftSide {
+		color: white;
+		border-radius: 30px;
+		cursor: pointer;
+		transition: filter 0.25s ease-in-out;
+
+		&:hover {
+			> img {
+				filter: brightness(60%);
+			}
+			> span {
+				opacity: 1;
+			}
+		}
+	}
+
+	.backButton {
+		font-size: 2rem;
+		position: fixed;
+		left: 40px;
+		top: 100px;
+		cursor: pointer;
+
+		label {
+			font-size: 16px;
+			margin-left: 40px;
+		}
+	}
+
+	.image {
+		width: 500px;
+		height: auto;
+		border-radius: 30px 0 0 30px;
+		transition: filter 0.25s ease-in-out;
+		cursor: pointer;
+		&:hover {
+			filter: brightness(60%);
+		}
+	}
+
+	.infoImage {
+		position: relative;
+		background-color: #fff;
+		width: 500px;
+		height: 99%;
+		border-radius: 0 30px 30px 0;
+	}
 `;
 
 const ShareButton = styled(ShareIcon)`
@@ -81,37 +112,6 @@ const DownloadButton = styled.a`
 	}
 `;
 
-const LinkButtonLeftSide = styled.a`
-	color: white;
-	border-radius: 30px;
-	cursor: pointer;
-	transition: filter 0.25s ease-in-out;
-
-	&:hover {
-		> img {
-			filter: brightness(60%);
-		}
-		> span {
-			opacity: 1;
-		}
-	}
-`;
-
-const ImageDetailStyled = styled.div`
-	.backButton {
-		font-size: 2rem;
-		position: fixed;
-		left: 40px;
-		top: 100px;
-		cursor: pointer;
-
-		label {
-			font-size: 16px;
-			margin-left: 40px;
-		}
-	}
-`;
-
 const ImageDetailPage: React.FC = () => {
 	const history = useHistory();
 	const location = useLocation<FlickrResponseType>();
@@ -136,23 +136,28 @@ const ImageDetailPage: React.FC = () => {
 		<>
 			{!!location.state && (
 				<ImageDetailStyled>
-					<ImageDetailWrapper>
+					<div className="imageDetailWrapper">
 						<div className="backButton" onClick={handleGoBack}>
 							<label htmlFor="back" aria-label="Back">
 								Back
 							</label>
 							<BackButton id="back" />
 						</div>
-						<ImageWrapper>
-							<LinkButtonLeftSide
+						<div className="imageWrapper">
+							<a
+								className="linkButtonLeftSide"
 								href={location.state.link}
 								target="_blank"
 								rel="noreferrer"
 								title="View on image Flikr"
 								download>
-								<Image src={location.state.media.large} />
-							</LinkButtonLeftSide>
-							<InfoImage>
+								<img
+									className="image"
+									src={location.state.media.large}
+									alt={`Author by ${location.state.author}`}
+								/>
+							</a>
+							<div className="infoImage">
 								<p>Author: {formmatedAuthor}</p>
 								<p>Tags: {location.state.tags}</p>
 								<p>Published: {formmatedPublishDate}</p>
@@ -167,9 +172,9 @@ const ImageDetailPage: React.FC = () => {
 									target="_blank">
 									Download
 								</DownloadButton>
-							</InfoImage>
-						</ImageWrapper>
-					</ImageDetailWrapper>
+							</div>
+						</div>
+					</div>
 					<ImageHomePage />
 				</ImageDetailStyled>
 			)}

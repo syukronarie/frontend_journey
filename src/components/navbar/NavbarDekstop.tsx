@@ -1,13 +1,12 @@
-import { useCallback } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { NavLink, useHistory } from "react-router-dom";
-import BellIcon from "../../assets/icons/BellIcon";
-import DownArrowIcon from "../../assets/icons/DownArrowIcon";
-import LogoIcon from "../../assets/logo/LogoIcon";
-import SearchIcon from "../../assets/icons/SearchIcon";
 import styled from "styled-components";
 import GlobalColors from "src/styles/color/colors";
-import { useEffect, useState } from "react";
 import Sizing from "src/styles/Sizing";
+import LogoIcon from "../../assets/logo/LogoIcon";
+import SearchIcon from "../../assets/icons/SearchIcon";
+import BellIcon from "../../assets/icons/BellIcon";
+import DownArrowIcon from "../../assets/icons/DownArrowIcon";
 
 const StyledNavbar = styled.div`
 	.navbar {
