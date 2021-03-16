@@ -266,20 +266,22 @@ const NavbarDekstop: React.FC = () => {
 						/>
 					</div>
 				)}
-				<div className="wrapperMenuMobile">
-					<NavLink to="/" onClick={() => window.location.replace("/")}>
+				<NavLink to="/" onClick={() => window.location.replace("/")}>
+					<div className="wrapperMenuMobile">
 						<Home onClick={() => setShowSearch(false)} />
-					</NavLink>
-					<p>Home</p>
-				</div>
+						<p>Home</p>
+					</div>
+				</NavLink>
 				<div className="wrapperMenuMobile">
 					<Search onClick={() => setShowSearch(!showSearch)} />
 					<p>Search</p>
 				</div>
-				<div className="wrapperMenuMobile">
-					<BellIcon />
-					<p>News</p>
-				</div>
+				<NavLink to="/info">
+					<div className="wrapperMenuMobile">
+						<BellIcon />
+						<p>Info</p>
+					</div>
+				</NavLink>
 
 				<div className="wrapperMenuMobile">
 					<UserIcon />

@@ -204,7 +204,7 @@ const ImageDetailPage: React.FC = () => {
 				<ImageDetailStyled>
 					<Helmet>
 						<title>Details | Journey App</title>
-						<meta name="description" content="Helmet application" />
+						<meta name="description" content="Detail Page" />
 					</Helmet>
 					<div className="imageDetailWrapper">
 						<div className="backButton" onClick={handleGoBack}>

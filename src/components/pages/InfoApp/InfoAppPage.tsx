@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import Logo from "src/assets/logo/LogoIcon";
 import styled from "styled-components";
 
@@ -29,7 +30,9 @@ const InfoAppStyled = styled.div`
 	}
 
 	.description {
-		width: 300px;
+		@media screen and (max-width: 768px) {
+			width: 300px;
+		}
 	}
 
 	h1 {
@@ -69,6 +72,10 @@ const LogoIcon = styled(Logo)`
 const InfoAppPage: React.FC = () => {
 	return (
 		<InfoAppStyled>
+			<Helmet>
+				<title>Info | Journey App</title>
+				<meta name="description" content="Detail Page" />
+			</Helmet>
 			<div className="logoHeader">
 				<LogoIcon />
 				<h1 aria-label="Apps Name">Journey</h1>
