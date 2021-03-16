@@ -220,7 +220,7 @@ const ImageHomePage: React.FC = () => {
 	const history = useHistory();
 	const handleGoToDetail = (item: any) => {
 		const link = slugGenerator(item.published);
-		history.push(`/${link}`, item);
+		history.push(`/detail/${link}`, item);
 	};
 
 	return (

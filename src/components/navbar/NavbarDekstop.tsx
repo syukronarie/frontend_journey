@@ -296,11 +296,8 @@ const NavbarDekstop: React.FC = () => {
 					<NavLink to="/" exact onClick={() => window.location.replace("/")}>
 						<li className="menuItem">Home</li>
 					</NavLink>
-					<NavLink
-						to="/today"
-						exact
-						onClick={() => window.location.replace("/today")}>
-						<li className="menuItem">Today</li>
+					<NavLink to="/info" exact>
+						<li className="menuItem">Info</li>
 					</NavLink>
 				</ul>
 				<div className="wrapperInput">
