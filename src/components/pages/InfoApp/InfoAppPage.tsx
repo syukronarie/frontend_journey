@@ -82,8 +82,8 @@ const InfoAppPage: React.FC = () => {
 			</div>
 			<div className="description" aria-label="description">
 				<p>
-					Journey is my result test which I have build web apps that called
-					"Journey", the web application is responsive on dekstop, ipad, and
+					Journey is my result test which I have built web apps called
+					"Journey", the web application is responsive on desktop, ipad, and
 					phone, and stacks of my project are:
 				</p>
 				<br />
