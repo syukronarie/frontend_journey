@@ -1,14 +1,15 @@
-import { useEffect, useState, useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
-import styled from "styled-components";
-import GlobalColors from "src/styles/color/colors";
-import Sizing from "src/styles/Sizing";
-import LogoIcon from "../../assets/logo/LogoIcon";
-import SearchIcon from "../../assets/icons/SearchIcon";
-import BellIcon from "../../assets/icons/BellIcon";
-import DownArrowIcon from "../../assets/icons/DownArrowIcon";
 import HomeIcon from "src/assets/icons/HomeIcon";
 import UserIcon from "src/assets/icons/UserIcon";
+import GlobalColors from "src/styles/color/colors";
+import Sizing from "src/styles/Sizing";
+import styled from "styled-components";
+
+import BellIcon from "../../assets/icons/BellIcon";
+import DownArrowIcon from "../../assets/icons/DownArrowIcon";
+import SearchIcon from "../../assets/icons/SearchIcon";
+import LogoIcon from "../../assets/logo/LogoIcon";
 
 const StyledNavbar = styled.div`
 	display: flex;
@@ -150,7 +151,7 @@ const StyledNavbar = styled.div`
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			gap: 20px;
+			/* gap: 20px; */
 
 			p {
 				font-size: 14px;
@@ -164,6 +165,7 @@ const StyledNavbar = styled.div`
 		justify-content: center;
 		align-items: center;
 		flex-flow: column;
+		margin: 15px;
 
 		svg {
 			font-size: 2rem;

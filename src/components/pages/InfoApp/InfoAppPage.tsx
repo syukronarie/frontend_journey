@@ -4,10 +4,9 @@ import styled from "styled-components";
 
 const InfoAppStyled = styled.div`
 	display: flex;
-	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-	height: 100vh;
+	height: 70rem;
 	max-width: 1200px;
 	margin: auto;
 	padding-top: 2rem;
